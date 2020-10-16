@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <h1 class="display-4">Lab Verifier</h1>
+    <p>Let us automatically check your API endpoints. Fill in the url of your website below.</p>
+    <form>
+        <div class="form-group">
+            <label for="url">Url</label>
+            <input type="url" class="form-control" id="url" aria-describedby="urlHelp" placeholder="Enter Url" />
+            <small id="urlHelp" class="form-text text-muted">Example: "http://"</small>
+        </div>
+        <div class="form-group">
+            <label for="username">Hackerrank Username</label>
+            <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter Username" />
+            <small id="usernameHelp" class="form-text text-muted">Please make sure your username is correct. Case-sensitive.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Check</button>
+    </form>
+
+</div>
