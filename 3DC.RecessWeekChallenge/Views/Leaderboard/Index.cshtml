@@ -16,6 +16,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Rank)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -27,12 +30,17 @@
             <th>
                 @Html.DisplayNameFor(model => model.HackerrankScore)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalScore)
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rank)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -44,6 +52,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HackerrankScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalScore)
             </td>
             @if ((await AuthorizationService.AuthorizeAsync(User, "AdminPolicy")).Succeeded)
             {

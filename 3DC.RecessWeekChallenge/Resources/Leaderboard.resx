@@ -132,4 +132,10 @@
   <data name="nameName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="rankName" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="totalScoreName" xml:space="preserve">
+    <value>Total Score</value>
+  </data>
 </root>

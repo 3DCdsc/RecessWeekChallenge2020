@@ -104,5 +104,23 @@ namespace _3DC.RecessWeekChallenge.Resources {
                 return ResourceManager.GetString("nameName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rank.
+        /// </summary>
+        public static string rankName {
+            get {
+                return ResourceManager.GetString("rankName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Score.
+        /// </summary>
+        public static string totalScoreName {
+            get {
+                return ResourceManager.GetString("totalScoreName", resourceCulture);
+            }
+        }
     }
 }

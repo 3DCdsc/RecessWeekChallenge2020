@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,5 +28,13 @@ namespace _3DC.RecessWeekChallenge.Models
         [Required]
         [Display(Name = "hackerrankScoreName", ResourceType = typeof(Resources.Leaderboard))]
         public int HackerrankScore { get; set; }
+
+        [NotMapped]
+        [Display(Name = "totalScoreName", ResourceType = typeof(Resources.Leaderboard))]
+        public int TotalScore { get => HackerrankScore + LabScore; }
+
+        [NotMapped]
+        [Display(Name = "rankName", ResourceType = typeof(Resources.Leaderboard))]
+        public int Rank { get; set; }
     }
 }

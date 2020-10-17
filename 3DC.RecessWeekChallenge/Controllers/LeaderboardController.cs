@@ -23,7 +23,14 @@ namespace _3DC.RecessWeekChallenge.Controllers
         // GET: LeaderboardRows
         public async Task<IActionResult> Index()
         {
-            return View(await _context.LeaderboardRow.ToListAsync());
+            var participants = from p in _context.LeaderboardRow select p;
+            participants = participants.OrderByDescending(p => p.LabScore + p.HackerrankScore);
+            List<LeaderboardRow> participantsResult = await participants.AsNoTracking().ToListAsync();
+            for (int i = 0; i < participantsResult.Count(); ++i)
+            {
+                participantsResult[i].Rank = i + 1;
+            }
+            return View(participantsResult);
         }
 
         // GET: LeaderboardRows/Details/5
