@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _3DC.RecessWeekChallenge.Data;
 
 namespace _3DC.RecessWeekChallenge.Migrations
 {
     [DbContext(typeof(_3DCRecessWeekChallengeContext))]
-    partial class _3DCRecessWeekChallengeContextModelSnapshot : ModelSnapshot
+    [Migration("20201020155541_InitialCreate2")]
+    partial class InitialCreate2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

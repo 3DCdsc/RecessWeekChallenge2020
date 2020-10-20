@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,10 +19,15 @@ namespace _3DC.RecessWeekChallenge.Areas.Identity
         {
             builder.ConfigureServices((context, services) =>
             {
+
+                var builder = new SqlConnectionStringBuilder(
+                    context.Configuration.GetConnectionString("LoginContextConnection"));
+                builder.Password = context.Configuration["DbSvPw"];
+                string _connection = builder.ConnectionString;
+
                 services.AddDbContext<LoginContext>(options =>
                 {
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("LoginContextConnection"));
+                    options.UseSqlServer(_connection);
                 });
 
                 services.AddDefaultIdentity<LoginUser>(options => options.SignIn.RequireConfirmedAccount = false)

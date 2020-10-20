@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using _3DC.RecessWeekChallenge.Models;
 using _3DC.RecessWeekChallenge.Data;
+using Microsoft.Data.SqlClient;
 
 namespace _3DC.RecessWeekChallenge
 {
@@ -28,10 +29,16 @@ namespace _3DC.RecessWeekChallenge
         {
             services.AddControllersWithViews();
 
+            var builder = new SqlConnectionStringBuilder(
+                Configuration.GetConnectionString("_3DCRecessWeekChallengeContext"));
+            builder.Password = Configuration["DbSvPw"];
+            string _connection = builder.ConnectionString;
+
             services.AddDbContext<_3DCRecessWeekChallengeContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("_3DCRecessWeekChallengeContext")));
+                    options.UseSqlServer(_connection));
             services.AddRazorPages();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
