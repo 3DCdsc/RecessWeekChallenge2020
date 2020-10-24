@@ -6,6 +6,7 @@
     <UserSecretsId>2f704731-fe4a-4dd2-a6ee-ff12e3f5a21b</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="jQuery" Version="3.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
@@ -16,6 +17,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\Leaderboard.Designer.cs">

@@ -1,22 +1,45 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#check_spinner").hide();
+        $("#checkform").submit(function () {
+            $("#check_spinner").show();
+            var jqxhr = $.post('/Home/Check', $('#checkform').serialize())
+                .done(function (data) {
+                    console.log(data);
+                    $('#message').html(data);
+                })
+                .fail(function () {
+                    console.log("fail");
+                    $('#message').html("Unable to access your application");
+                })
+                .always(function () {
+                    $("#check_spinner").hide();
+                });
+            return false;
+        });
+    });
+</script>
 
 <div>
     <h1 class="display-4">Lab Verifier</h1>
     <p>Let us automatically check your API endpoints. Fill in the url of your website below.</p>
-    <form>
+    <form id="checkform">
         <div class="form-group">
             <label for="url">Url</label>
-            <input type="url" class="form-control" id="url" aria-describedby="urlHelp" placeholder="Enter Url" />
+            <input type="url" class="form-control" id="url" name="url" aria-describedby="urlHelp" placeholder="Enter Url" />
             <small id="urlHelp" class="form-text text-muted">Example: "http://"</small>
         </div>
         <div class="form-group">
             <label for="username">Hackerrank Username</label>
-            <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter Username" />
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Enter Username" />
             <small id="usernameHelp" class="form-text text-muted">Please make sure your username is correct. Case-sensitive.</small>
         </div>
-        <button type="submit" class="btn btn-primary">Check</button>
+        <input type="submit" class="btn btn-primary" value="Check">
+        <div id="check_spinner" class="spinner-border" role="status"></div>
+        <div id="message"></div>
     </form>
 
 </div>

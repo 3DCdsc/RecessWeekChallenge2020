@@ -17,22 +17,35 @@ namespace _3DC.RecessWeekChallenge
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
+        private readonly IWebHostEnvironment _env;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHttpClient();
 
-            var builder = new SqlConnectionStringBuilder(
-                Configuration.GetConnectionString("_3DCRecessWeekChallengeContext"));
-            builder.Password = Configuration["DbSvPw"];
-            string _connection = builder.ConnectionString;
+            string _connection;
+            if (_env.IsProduction())
+            {
+                var builder = new SqlConnectionStringBuilder(
+                    Configuration.GetConnectionString("_3DCRecessWeekChallengeContext"));
+                builder.Password = Configuration["DbSvPw"];
+                _connection = builder.ConnectionString;
+            } else
+            {
+                var builder = new SqlConnectionStringBuilder(
+                    Configuration.GetConnectionString("_3DCRecessWeekChallengeContextDev"));
+                _connection = builder.ConnectionString;
+            }
+           
 
             services.AddDbContext<_3DCRecessWeekChallengeContext>(options =>
                     options.UseSqlServer(_connection));

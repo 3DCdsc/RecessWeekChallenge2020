@@ -9,6 +9,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 [assembly: HostingStartup(typeof(_3DC.RecessWeekChallenge.Areas.Identity.IdentityHostingStartup))]
 namespace _3DC.RecessWeekChallenge.Areas.Identity
@@ -19,11 +20,20 @@ namespace _3DC.RecessWeekChallenge.Areas.Identity
         {
             builder.ConfigureServices((context, services) =>
             {
+                string _connection;
 
-                var builder = new SqlConnectionStringBuilder(
-                    context.Configuration.GetConnectionString("LoginContextConnection"));
-                builder.Password = context.Configuration["DbSvPw"];
-                string _connection = builder.ConnectionString;
+                if (context.HostingEnvironment.IsProduction())
+                {
+                    var builder = new SqlConnectionStringBuilder(
+                        context.Configuration.GetConnectionString("LoginContextConnection"));
+                    builder.Password = context.Configuration["DbSvPw"];
+                    _connection = builder.ConnectionString;
+                } else
+                {
+                    var builder = new SqlConnectionStringBuilder(
+                        context.Configuration.GetConnectionString("LoginContextConnectionDev"));
+                    _connection = builder.ConnectionString;
+                }
 
                 services.AddDbContext<LoginContext>(options =>
                 {
