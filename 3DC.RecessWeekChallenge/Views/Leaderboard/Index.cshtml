@@ -10,6 +10,11 @@
 <h1>Leaderboard</h1>
 
 <p>
+    @if ((await AuthorizationService.AuthorizeAsync(User, "AdminPolicy")).Succeeded)
+    {
+        <a asp-action="Create">Create New</a>
+    }
+
 </p>
 <table class="table">
     <thead>
