@@ -99,17 +99,20 @@ namespace _3DC.RecessWeekChallenge.Services
         private async Task UpdateDatabase(HackerrankLeaderboardModel model)
         {
             List<string> hackerList = model.Models.Select(m => m.Hacker).ToList();
-            _logger.LogInformation("Checkpoint3 {hackerlist}", hackerList.Count);
             using (var scope = Services.CreateScope())
             {
                 var scopedContext = scope.ServiceProvider.GetRequiredService<_3DCRecessWeekChallengeContext>();
-                _logger.LogInformation("Checkpoint4 {scopedContext}", scopedContext == null);
                 scopedContext.LeaderboardRow
                     .Where(row => hackerList.Contains(row.HackerrankUsername))
                     .ToList()
-                    .ForEach(user => user.HackerrankScore = (int)model.Models
-                        .FirstOrDefault(m => m.Hacker == user.HackerrankUsername).Score);
-                _logger.LogInformation("Checkpoint5");
+                    .ForEach((user) => {
+                        var _m = model.Models
+                            .FirstOrDefault(m => m.Hacker == user.HackerrankUsername);
+                        if (_m == null) return;
+                        _logger.LogInformation("Checkpoint5");
+                        user.HackerrankScore = (int)(_m.Score);
+                        });
+                _logger.LogInformation("Checkpoint6");
                 await scopedContext.SaveChangesAsync();
                 
             }
