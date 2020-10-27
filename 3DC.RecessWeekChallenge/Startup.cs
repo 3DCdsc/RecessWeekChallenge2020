@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using _3DC.RecessWeekChallenge.Models;
 using _3DC.RecessWeekChallenge.Data;
 using Microsoft.Data.SqlClient;
+using _3DC.RecessWeekChallenge.Services;
 
 namespace _3DC.RecessWeekChallenge
 {
@@ -31,6 +32,7 @@ namespace _3DC.RecessWeekChallenge
         {
             services.AddControllersWithViews();
             services.AddHttpClient();
+            services.AddHostedService<HackerrankLeaderboardService>();
 
             string _connection;
             if (_env.IsProduction())
