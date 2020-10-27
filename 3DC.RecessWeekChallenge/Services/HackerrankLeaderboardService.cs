@@ -56,7 +56,7 @@ namespace _3DC.RecessWeekChallenge.Services
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogInformation("Exception from worker {message}", ex.Message);
+                    _logger.LogInformation("Exception from worker {message}", ex.StackTrace);
                 }
                 finally
                 {
