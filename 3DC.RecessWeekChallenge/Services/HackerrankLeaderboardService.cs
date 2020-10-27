@@ -109,10 +109,8 @@ namespace _3DC.RecessWeekChallenge.Services
                         var _m = model.Models
                             .FirstOrDefault(m => m.Hacker == user.HackerrankUsername);
                         if (_m == null) return;
-                        _logger.LogInformation("Checkpoint5");
                         user.HackerrankScore = (int)(_m.Score);
                         });
-                _logger.LogInformation("Checkpoint6");
                 await scopedContext.SaveChangesAsync();
                 
             }
