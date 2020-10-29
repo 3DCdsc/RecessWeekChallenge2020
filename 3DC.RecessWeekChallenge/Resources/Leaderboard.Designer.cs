@@ -61,11 +61,29 @@ namespace _3DC.RecessWeekChallenge.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Timed Score.
+        /// </summary>
+        public static string hackerrankFinalScoreName {
+            get {
+                return ResourceManager.GetString("hackerrankFinalScoreName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hackerrank Score.
         /// </summary>
         public static string hackerrankScoreName {
             get {
                 return ResourceManager.GetString("hackerrankScoreName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Final Time.
+        /// </summary>
+        public static string hackerrankTimeName {
+            get {
+                return ResourceManager.GetString("hackerrankTimeName", resourceCulture);
             }
         }
         

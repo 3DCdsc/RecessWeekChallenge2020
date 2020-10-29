@@ -35,7 +35,13 @@
                 @Html.DisplayNameFor(model => model.HackerrankScore)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.HackerrankFinalScore)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.TotalScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HackerrankTime)
             </th>
         </tr>
     </thead>
@@ -58,7 +64,13 @@
                 @Html.DisplayFor(modelItem => item.HackerrankScore)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.HackerrankFinalScore)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.TotalScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HackerrankTime)
             </td>
             @if ((await AuthorizationService.AuthorizeAsync(User, "AdminPolicy")).Succeeded)
             {

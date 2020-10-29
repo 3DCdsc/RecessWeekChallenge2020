@@ -1,6 +1,7 @@
 ﻿using _3DC.RecessWeekChallenge.Data;
 using _3DC.RecessWeekChallenge.Models;
 using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -52,7 +53,8 @@ namespace _3DC.RecessWeekChallenge.Services
                 try
                 {
                     HackerrankLeaderboardModel model = await UpdateHackerrankLeaderBoard();
-                    await UpdateDatabase(model);
+                    HackerrankLeaderboardModel finalModel = await UpdateHackerrankFinalLeaderBoard();
+                    await UpdateDatabase(model, finalModel);
                 }
                 catch (Exception ex)
                 {
@@ -96,9 +98,25 @@ namespace _3DC.RecessWeekChallenge.Services
             }
         }
 
-        private async Task UpdateDatabase(HackerrankLeaderboardModel model)
+        private async Task<HackerrankLeaderboardModel> UpdateHackerrankFinalLeaderBoard()
+        {
+            var result = await _httpClient.GetAsync(_configuration["Urls:HackerrankFinal"]);
+            result.EnsureSuccessStatusCode();
+            _logger.LogInformation("Hackerrank Final Leaderboard Obtained");
+            HackerrankLeaderboardModel model = JsonConvert
+                .DeserializeObject<HackerrankLeaderboardModel>(await result.Content.ReadAsStringAsync());
+            if (model == null)
+            {
+                throw new Exception("No response from Hackerrank Final");
+            }
+            return model;
+
+        }
+
+        private async Task UpdateDatabase(HackerrankLeaderboardModel model, HackerrankLeaderboardModel finalModel)
         {
             List<string> hackerList = model.Models.Select(m => m.Hacker).ToList();
+            List<string> finalHackerList = finalModel.Models.Select(m => m.Hacker).ToList();
             using (var scope = Services.CreateScope())
             {
                 var scopedContext = scope.ServiceProvider.GetRequiredService<_3DCRecessWeekChallengeContext>();
@@ -108,9 +126,23 @@ namespace _3DC.RecessWeekChallenge.Services
                     .ForEach((user) => {
                         var _m = model.Models
                             .FirstOrDefault(m => m.Hacker == user.HackerrankUsername);
-                        if (_m == null) return;
+                        if (_m != null)
                         user.HackerrankScore = (int)(_m.Score);
                         });
+
+                scopedContext.LeaderboardRow
+                    .Where(row => finalHackerList.Contains(row.HackerrankUsername))
+                    .ToList()
+                    .ForEach((user) => {
+                        var _m = model.Models
+                            .FirstOrDefault(m => m.Hacker == user.HackerrankUsername);
+                        if (_m != null)
+                        {
+                            user.HackerrankFinalScore = (int)(_m.Score);
+                            user.HackerrankTimeInt = (int)(_m.TimeTaken);
+                        }
+                    });
+
                 await scopedContext.SaveChangesAsync();
                 
             }

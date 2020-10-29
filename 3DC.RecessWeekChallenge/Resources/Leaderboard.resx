@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="hackerrankFinalScoreName" xml:space="preserve">
+    <value>Timed Score</value>
+  </data>
   <data name="hackerrankScoreName" xml:space="preserve">
     <value>Hackerrank Score</value>
+  </data>
+  <data name="hackerrankTimeName" xml:space="preserve">
+    <value>Final Time</value>
   </data>
   <data name="hackerrankUsernameName" xml:space="preserve">
     <value>Hackerrank Username</value>

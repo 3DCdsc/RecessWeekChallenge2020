@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _3DC.RecessWeekChallenge.Data;
 
-namespace _3DC.RecessWeekChallenge.Migrations
+namespace _3DC.RecessWeekChallenge.Migrations._3DCRecessWeekChallenge
 {
     [DbContext(typeof(_3DCRecessWeekChallengeContext))]
-    [Migration("20201020155541_InitialCreate2")]
-    partial class InitialCreate2
+    [Migration("20201029185119_AddFinalChallenge")]
+    partial class AddFinalChallenge
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,13 @@ namespace _3DC.RecessWeekChallenge.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("HackerrankFinalScore")
+                        .HasColumnType("int");
+
                     b.Property<int>("HackerrankScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HackerrankTimeInt")
                         .HasColumnType("int");
 
                     b.Property<string>("HackerrankUsername")

@@ -25,7 +25,13 @@ namespace _3DC.RecessWeekChallenge.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("HackerrankFinalScore")
+                        .HasColumnType("int");
+
                     b.Property<int>("HackerrankScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HackerrankTimeInt")
                         .HasColumnType("int");
 
                     b.Property<string>("HackerrankUsername")
