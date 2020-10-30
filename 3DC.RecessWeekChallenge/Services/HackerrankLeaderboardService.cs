@@ -134,7 +134,7 @@ namespace _3DC.RecessWeekChallenge.Services
                     .Where(row => finalHackerList.Contains(row.HackerrankUsername))
                     .ToList()
                     .ForEach((user) => {
-                        var _m = model.Models
+                        var _m = finalModel.Models
                             .FirstOrDefault(m => m.Hacker == user.HackerrankUsername);
                         if (_m != null)
                         {
