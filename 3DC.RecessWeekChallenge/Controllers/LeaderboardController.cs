@@ -26,7 +26,7 @@ namespace _3DC.RecessWeekChallenge.Controllers
             var participants = from p in _context.LeaderboardRow select p;
             participants = participants
                 .OrderByDescending(p => p.LabScore + p.HackerrankScore)
-                .ThenByDescending(p => p.HackerrankFinalScore);
+                .ThenByDescending(p => p.HackerrankTimeInt);
             List<LeaderboardRow> participantsResult = await participants.AsNoTracking().ToListAsync();
             for (int i = 0; i < participantsResult.Count(); ++i)
             {
